@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>aideen's little space</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: #C9E9E7;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    body.night {
+      background-color: #9FBFC0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 22px;
+      border-radius: 18px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+      animation: floatIn 1.2s ease;
+      text-align: center;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    img {
+      width: 220px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    p {
+      font-size: 13px;
+      color: #6B7F7F;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: #6B7F7F;
+    }
+
+    .divider {
+      margin: 14px 0;
+      font-size: 12px;
+      opacity: 0.5;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* typing */
+    #typing-name, #typing-desc {
+      min-height: 18px;
+    }
+
+    /* mood jar */
+    .mood-title {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
+
+    .mood-buttons span {
+      font-size: 22px;
+      margin: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .mood-buttons span:hover {
+      transform: scale(1.2);
+    }
+
+    .mood-jar {
+      margin-top: 10px;
+      min-height: 55px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.5);
+      padding: 8px;
+      font-size: 18px;
+    }
+
+    #moodText {
+      font-size: 12px;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    /* NGL */
+    .ngl-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 9px 20px;
+      background: #C9E9E7;
+      color: #6B7F7F;
+      border-radius: 25px;
+      font-size: 12px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .ngl-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* heart box */
+    .heart-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 16px;
+      padding: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .heart-box:hover {
+      transform: scale(1.03);
+    }
+
+    .heart {
+      font-size: 26px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* quote popup */
+    .quote-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 998;
+    }
+
+    .quote-box {
+      background: white;
+      padding: 16px;
+      border-radius: 18px;
+      animation: floatIn 0.6s ease;
+    }
+
+    .quote-box img {
+      width: 240px;
+      border-radius: 14px;
+    }
+
+    /* sleep reminder */
+    .sleep-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .sleep-box {
+      background: white;
+      padding: 22px;
+      border-radius: 18px;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    .sleep-btn {
+      display: block;
+      margin: 8px auto;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .sleep-yes {
+      background: #C9E9E7;
+      color: #6B7F7F;
+    }
+
+    .sleep-no {
+      background: transparent;
+      opacity: 0.7;
+    }
+
+    /* dino interaction */
+    .dino-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .dino-main {
+      width: 220px;
+      border-radius: 20px;
+    }
+
+    .dino-laugh {
+      position: absolute;
+      top: -20px; /* di atas dino utama */
+      left: 50%;
+      width: 120px;
+      opacity: 0;
+      transform: translateX(-50%) scale(0.6);
+      pointer-events: none;
+      z-index: 10;
+      transition: 0.25s ease;
+    }
+
+    .dino-laugh.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- sleep overlay -->
+<div class="sleep-overlay" id="sleepOverlay">
+  <div class="sleep-box">
+    <p id="sleepText"></p>
+    <button class="sleep-btn sleep-yes" onclick="goSleep()">makasih udah ngingetin</button>
+    <button class="sleep-btn sleep-no" onclick="stayAwake()">aku masih ga mau tidur</button>
+  </div>
+</div>
+
+<!-- quote popup -->
+<div class="quote-overlay" id="quoteOverlay" onclick="closeQuote()">
+  <div class="quote-box">
+    <img src="quotes.png">
+  </div>
+</div>
+
+<div class="container">
+  <div class="box">
+
+    <!-- DINO -->
+    <div class="dino-wrapper" onclick="dinoLaugh()">
+      <img src="dino.jpg" class="dino-main">
+      <img src="pixel-dino.png" class="dino-laugh" id="laughDino">
+    </div>
+
+    <audio id="dinoSound" src="pur.mp3"></audio>
+
+    <p id="typing-name"></p>
+    <p id="typing-desc"></p>
+
+    <div class="divider">──── ✿ ────</div>
+
+    <h1>hello there 💗</h1>
+
+    <p>
+      this is my little space,<br>
+      dibuat cuma buat fun & senang-senang 🌸
+    </p>
+
+    <audio controls>
+      <source src="soft.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="divider">──── mood jar ────</div>
+
+    <p class="mood-title">how are you feeling right now?</p>
+
+    <div class="mood-buttons">
+      <span onclick="addMood('😩')">😩</span>
+      <span onclick="addMood('😔')">😔</span>
+      <span onclick="addMood('🙂')">🙂</span>
+      <span onclick="addMood('😌')">😌</span>
+      <span onclick="addMood('🤗')">🤗</span>
+      <span onclick="addMood('🥰')">🥰</span>
+      <span onclick="addMood('😚')">😚</span>
+    </div>
+
+    <div class="mood-jar" id="moodJar"></div>
+    <p id="moodText"></p>
+
+    <div class="divider">──── say something ────</div>
+
+    <p style="font-size:11px; opacity:0.7;">
+      kamu juga bisa ninggalin pesan anonim 🤍
+    </p>
+
+    <a href="https://ngl.link/41deen" target="_blank" class="ngl-btn">
+      💭 leave a soft message
+    </a>
+
+    <div class="divider">──── little reminder ────</div>
+
+    <div class="heart-box" onclick="openQuote()">
+      <div class="heart">💗</div>
+      <p style="font-size:11px; opacity:0.7;">tap gently</p>
+    </div>
+
+    <p style="font-size:11px; opacity:0.6; margin-top:14px;">
+      ⋆｡˚ welcome to my tiny world ✨
+    </p>
+
+  </div>
+</div>
+
+<script>
+  /* typing */
+  const text1 = "🌷 hi, i'm aideen";
+  const text2 = "just a random soul wandering on the internet ✨";
+  let i = 0, j = 0;
+
+  function typeName() {
+    if (i < text1.length) {
+      document.getElementById("typing-name").innerHTML += text1.charAt(i++);
+      setTimeout(typeName, 80);
+    } else setTimeout(typeDesc, 300);
+  }
+
+  function typeDesc() {
+    if (j < text2.length) {
+      document.getElementById("typing-desc").innerHTML += text2.charAt(j++);
+      setTimeout(typeDesc, 60);
+    }
+  }
+  typeName();
+
+  /* mood messages */
+  const moodMessages = {
+    "😩": ["you’ve been carrying too much.", "it’s okay to pause.", "being tired isn’t failure."],
+    "😔": ["you don’t have to smile.", "sadness deserves space.", "you are valid."],
+    "🙂": ["being okay is enough.", "neutral days still count.", "peace is progress."],
+    "😌": ["this calm feels earned.", "nothing needs fixing.", "rest suits you."],
+    "🤗": ["imagine a warm hug.", "you are safe here.", "comfort is allowed."],
+    "🥰": ["soft joy looks good on you.", "hold this feeling.", "let it linger."],
+    "😚": ["a tiny kiss of comfort.", "sweet moments matter.", "be gentle with yourself."]
+  };
+
+  function addMood(emoji) {
+    document.getElementById("moodJar").innerHTML += emoji;
+    const msgs = moodMessages[emoji];
+    document.getElementById("moodText").innerText =
+      msgs[Math.floor(Math.random() * msgs.length)];
+  }
+
+  /* night mode */
+  const now = new Date();
+  const hour = now.getHours();
+  if (hour >= 18 || hour <= 5) document.body.classList.add("night");
+
+  /* sleep reminder */
+  if (now.getMonth() === 0 && now.getDate() >= 9 && hour >= 23 && !sessionStorage.getItem("stayAwake")) {
+    document.getElementById("sleepText").innerText =
+      `ini udah jam ${now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}, kamu ga istirahat??`;
+    document.getElementById("sleepOverlay").style.display = "flex";
+  }
+
+  function stayAwake() {
+    sessionStorage.setItem("stayAwake", "yes");
+    document.getElementById("sleepOverlay").style.display = "none";
+  }
+
+  function goSleep() {
+    document.body.innerHTML =
+      "<div style='min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#6B7F7F;'>makasih udah mampir 🤍<br>sekarang istirahat ya.</div>";
+  }
+
+  function openQuote() {
+    document.getElementById("quoteOverlay").style.display = "flex";
+  }
+
+  function closeQuote() {
+    document.getElementById("quoteOverlay").style.display = "none";
+  }
+
+  /* dino laugh interaction */
+  let dinoCooldown = false;
+  function dinoLaugh() {
+    if(dinoCooldown) return;
+    dinoCooldown = true;
+
+    const laughDino = document.getElementById("laughDino");
+    const sound = document.getElementById("dinoSound");
+
+    if(!laughDino || !sound) return;
+
+    sound.currentTime = 0;
+    sound.play();
+
+    laughDino.classList.add("show");
+
+    setTimeout(()=>{ laughDino.classList.remove("show"); }, 700);
+    setTimeout(()=>{ dinoCooldown = false; }, 1200);
+  }
+</script>
+
+</body>
+</html>
